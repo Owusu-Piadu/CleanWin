@@ -18,7 +18,7 @@ import { EthereumPrivateKeyProvider } from "@web3auth/ethereum-provider"
 import { useMediaQuery } from "@/hooks/useMediaQuery"
 import { createUser, getUnreadNotifications, markNotificationAsRead, getUserByEmail, getUserBalance } from "@/utils/db/actions"
 
-const clientId = process.env.WEB3AUTH_CLIENT_ID
+const clientId = process.env.WEB3_AUTH_CLIENT_ID
 
 const chainConfig = {
   chainNamespace: CHAIN_NAMESPACES.EIP155,
@@ -35,6 +35,7 @@ const privateKeyProvider = new EthereumPrivateKeyProvider({
   config: { chainConfig },
 });
 
+//setting Up Web3auth Network/object
 const web3auth = new Web3Auth({
   clientId,
   web3AuthNetwork: WEB3AUTH_NETWORK.TESTNET, // Changed from SAPPHIRE_MAINNET to TESTNET
@@ -46,6 +47,7 @@ interface HeaderProps {
   totalEarnings: number;
 }
 
+//Setting Up the States for the Applicaton
 export default function Header({ onMenuClick, totalEarnings }: HeaderProps) {
   const [provider, setProvider] = useState<IProvider | null>(null);
   const [loggedIn, setLoggedIn] = useState(false);
@@ -58,6 +60,7 @@ export default function Header({ onMenuClick, totalEarnings }: HeaderProps) {
 
   console.log('user info', userInfo);
   
+  //Setting Up web3auth 
   useEffect(() => {
     const init = async () => {
       try {
